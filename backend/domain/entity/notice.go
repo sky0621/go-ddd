@@ -3,33 +3,33 @@ package entity
 import (
 	"errors"
 	ag "go-ddd/backend/domain/aggregate"
-	"go-ddd/backend/domain/enum"
 	"go-ddd/backend/domain/error"
+	vo "go-ddd/backend/domain/valueobject"
 )
 
 // Notice ... 「お知らせ」データ定義
 type Notice struct {
 	// ユニークに特定するID
-	id enum.UniqueID
+	id vo.UniqueID
 	// 概要を示すタイトル
 	title string
 	// 詳細
 	detail string
 	// 重要度
-	severity enum.NoticeSeverity
+	severity vo.NoticeSeverity
 	// 公開設定
 	publishControl *ag.PublishControl
 }
 
 // NewNotice ...
-func NewNotice(id enum.UniqueID, title, detail string, severity enum.NoticeSeverity, publishControl *ag.PublishControl) (*Notice, error.ApplicationError) {
-	if id == "" {
+func NewNotice(uid vo.UniqueID, title, detail string, severity vo.NoticeSeverity, publishControl *ag.PublishControl) (*Notice, error.ApplicationError) {
+	if uid.GetVal() == "" {
 		return nil, error.CreateValidationError(error.Required, errors.New("id is required"))
 	}
 	// FIXME: その他バリデーション
 
 	return &Notice{
-		id:             id,
+		id:             uid,
 		title:          title,
 		detail:         detail,
 		severity:       severity,
