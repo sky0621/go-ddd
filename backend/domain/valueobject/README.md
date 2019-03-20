@@ -2,6 +2,8 @@
 
 [DDD](http://domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf)における「Value Objects」に相当する。
 
+振る舞いを持つ不変オブジェクト
+
 何かを計測したり、定量化したりして説明する際に使用するオブジェクト
 
 数字／文字列／日付をはじめ、姓／名／金額／色といった「ユビキタス言語」を表現するために活用

@@ -1,5 +1,7 @@
 package valueobject
 
+import "strings"
+
 // NewOrganizationLogicalName ...
 func NewOrganizationLogicalName(logicalName string) OrganizationName {
 	return NewOrganizationName(logicalName, "", "")
@@ -22,6 +24,7 @@ type OrganizationName interface {
 	GetOrganizationLogicalName() string
 	GetOrganizationLogicalKanaName() string
 	GetOrganizationPhysicalName() string
+	Equals(comparison OrganizationName) bool
 }
 
 type organizationName struct {
@@ -46,4 +49,14 @@ func (on *organizationName) GetOrganizationLogicalKanaName() string {
 // GetOrganizationPhysicalName ...
 func (on *organizationName) GetOrganizationPhysicalName() string {
 	return on.physicalName
+}
+
+// Equals ...
+func (on *organizationName) Equals(comparison OrganizationName) bool {
+	if on == nil || comparison == nil {
+		return false
+	}
+	return (strings.Compare(on.GetOrganizationLogicalName(), comparison.GetOrganizationLogicalName()) != -1) &&
+		(strings.Compare(on.GetOrganizationLogicalKanaName(), comparison.GetOrganizationLogicalKanaName()) != -1) &&
+		(strings.Compare(on.GetOrganizationPhysicalName(), comparison.GetOrganizationPhysicalName()) != -1)
 }
