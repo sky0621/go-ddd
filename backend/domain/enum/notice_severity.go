@@ -1,4 +1,4 @@
-package valueobject
+package enum
 
 const (
 	// NoticeSeverityInfo ... 通常レベルのお知らせ

@@ -1,13 +1,13 @@
 package aggregate
 
 import (
-	vo "go-ddd/backend/domain/valueobject"
+	"go-ddd/backend/domain/enum"
 )
 
 // Publish ...
 func Publish(term *PublishTerm) *PublishControl {
 	return &PublishControl{
-		isPublish: vo.Publish,
+		isPublish: enum.GeneralPublic,
 		term:      term,
 	}
 }
@@ -15,14 +15,14 @@ func Publish(term *PublishTerm) *PublishControl {
 // Private ...
 func Private() *PublishControl {
 	return &PublishControl{
-		isPublish: vo.Private,
+		isPublish: enum.Private,
 	}
 }
 
 // PublishControl ... 特定情報の公開制御
 type PublishControl struct {
 	// IsPublish ... 公開フラグ
-	isPublish vo.PublishFlg
+	isPublish enum.PublishType
 	// Term ... 公開期間
 	term *PublishTerm
 }

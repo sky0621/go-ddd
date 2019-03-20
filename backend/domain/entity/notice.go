@@ -3,12 +3,26 @@ package entity
 import (
 	"errors"
 	ag "go-ddd/backend/domain/aggregate"
+	"go-ddd/backend/domain/enum"
 	"go-ddd/backend/domain/error"
-	vo "go-ddd/backend/domain/valueobject"
 )
 
+// Notice ... 「お知らせ」データ定義
+type Notice struct {
+	// ユニークに特定するID
+	id enum.UniqueID
+	// 概要を示すタイトル
+	title string
+	// 詳細
+	detail string
+	// 重要度
+	severity enum.NoticeSeverity
+	// 公開設定
+	publishControl *ag.PublishControl
+}
+
 // NewNotice ...
-func NewNotice(id vo.UniqueID, title, detail string, severity vo.NoticeSeverity, publishControl *ag.PublishControl) (*Notice, error.ApplicationError) {
+func NewNotice(id enum.UniqueID, title, detail string, severity enum.NoticeSeverity, publishControl *ag.PublishControl) (*Notice, error.ApplicationError) {
 	if id == "" {
 		return nil, error.CreateValidationError(error.Required, errors.New("id is required"))
 	}
@@ -21,20 +35,6 @@ func NewNotice(id vo.UniqueID, title, detail string, severity vo.NoticeSeverity,
 		severity:       severity,
 		publishControl: publishControl,
 	}, nil
-}
-
-// Notice ... 「お知らせ」データ定義
-type Notice struct {
-	// ユニークに特定するID
-	id vo.UniqueID
-	// 概要を示すタイトル
-	title string
-	// 詳細
-	detail string
-	// 重要度
-	severity vo.NoticeSeverity
-	// 公開設定
-	publishControl *ag.PublishControl
 }
 
 // NoticeCommandCondition ... 条件に該当する「お知らせ」データを決定するために利用
