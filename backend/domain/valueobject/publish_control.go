@@ -1,8 +1,11 @@
 package valueobject
 
 // NewPublishControl ...
-func NewPublishControl() PublishControl {
-	return &publishControl{}
+func NewPublishControl(publishType PublishType, publishTerm PublishTerm) PublishControl {
+	return &publishControl{
+		publishType: publishType,
+		publishTerm: publishTerm,
+	}
 }
 
 // PublishControl ... 特定情報の公開制御

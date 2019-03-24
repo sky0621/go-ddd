@@ -8,5 +8,5 @@ type OrganizationAttribute struct {
 	id vo.UniqueID
 
 	// 組織名称
-	organizationName OrganizationName
+	organizationName vo.OrganizationName
 }
