@@ -7,18 +7,17 @@ import (
 	vo "go-ddd/backend/domain/valueobject"
 )
 
-// Notice ... 「お知らせ」データ定義
-type Notice struct {
+// NoticeAttribute ... 「お知らせ」データ定義
+type NoticeAttribute interface {
+}
+
+type noticeAttribute struct {
 	// ユニークに特定するID
 	id vo.UniqueID
 	// 概要を示すタイトル
 	title string
 	// 詳細
 	detail string
-	// 重要度
-	severity vo.NoticeSeverity
-	// 公開設定
-	publishControl *ag.PublishControl
 }
 
 // NewNotice ...
