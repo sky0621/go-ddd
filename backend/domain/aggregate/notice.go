@@ -7,9 +7,12 @@ import (
 )
 
 type Notice interface {
+	GetNoticeAttribute() entity.NoticeAttribute
+	GetNoticeSeverity() vo.NoticeSeverity
 }
 
 type notice struct {
+	// 「お知らせ」属性
 	noticeAttribute entity.NoticeAttribute
 	// 重要度
 	severity vo.NoticeSeverity

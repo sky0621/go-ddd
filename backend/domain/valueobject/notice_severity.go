@@ -50,32 +50,32 @@ type noticeSeverity struct {
 }
 
 // GetVal ...
-func (ns *noticeSeverity) GetVal() int {
-	return ns.val
+func (v *noticeSeverity) GetVal() int {
+	return v.val
 }
 
 // Equals ...
-func (ns *noticeSeverity) Equals(comparison NoticeSeverity) bool {
-	if ns == nil || comparison == nil {
+func (v *noticeSeverity) Equals(comparison NoticeSeverity) bool {
+	if v == nil || comparison == nil {
 		return false
 	}
-	return ns.GetVal() == comparison.GetVal()
+	return v.GetVal() == comparison.GetVal()
 }
 
 // IsNoticeSeverityInfo ... 通常レベルのお知らせか否かを返す
-func (ns *noticeSeverity) IsNoticeSeverityInfo() bool {
-	if ns == nil {
+func (v *noticeSeverity) IsNoticeSeverityInfo() bool {
+	if v == nil {
 		return false
 	}
-	return ns.val == NoticeSeverityInfo
+	return v.val == NoticeSeverityInfo
 }
 
 // IsNoticeSeverityImportant ... 重要レベルのお知らせか否かを返す
-func (ns *noticeSeverity) IsNoticeSeverityImportant() bool {
-	if ns == nil {
+func (v *noticeSeverity) IsNoticeSeverityImportant() bool {
+	if v == nil {
 		return false
 	}
-	return ns.val == NoticeSeverityImportant
+	return v.val == NoticeSeverityImportant
 }
 
 // IsNoticeSeverityInfo ... 通常レベルのお知らせか否かを返す

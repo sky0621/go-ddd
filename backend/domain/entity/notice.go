@@ -2,13 +2,31 @@ package entity
 
 import (
 	"errors"
-	ag "go-ddd/backend/domain/aggregate"
 	"go-ddd/backend/domain/error"
 	vo "go-ddd/backend/domain/valueobject"
 )
 
-// NoticeAttribute ... 「お知らせ」データ定義
+// NewNoticeNoticeAttribute ...
+func NewNoticeNoticeAttribute(uid vo.UniqueID, title, detail string) (NoticeAttribute, error.ApplicationError) {
+	if uid.GetVal() == "" {
+		return nil, error.CreateValidationError(error.Required, errors.New("id is required"))
+	}
+	if title == "" {
+		return nil, error.CreateValidationError(error.Required, errors.New("title is required"))
+	}
+
+	return &noticeAttribute{
+		id:     uid,
+		title:  title,
+		detail: detail,
+	}, nil
+}
+
+// NoticeAttribute ... 「お知らせ」属性
 type NoticeAttribute interface {
+	GetID() vo.UniqueID
+	GetTitle() string
+	GetDetail() string
 }
 
 type noticeAttribute struct {
@@ -20,20 +38,28 @@ type noticeAttribute struct {
 	detail string
 }
 
-// NewNotice ...
-func NewNotice(uid vo.UniqueID, title, detail string, severity vo.NoticeSeverity, publishControl *ag.PublishControl) (*Notice, error.ApplicationError) {
-	if uid.GetVal() == "" {
-		return nil, error.CreateValidationError(error.Required, errors.New("id is required"))
+// GetID ...
+func (a *noticeAttribute) GetID() vo.UniqueID {
+	if a == nil {
+		return nil
 	}
-	// FIXME: その他バリデーション
+	return a.id
+}
 
-	return &Notice{
-		id:             uid,
-		title:          title,
-		detail:         detail,
-		severity:       severity,
-		publishControl: publishControl,
-	}, nil
+// GetTitle ...
+func (a *noticeAttribute) GetTitle() string {
+	if a == nil {
+		return ""
+	}
+	return a.title
+}
+
+// GetDetail ...
+func (a *noticeAttribute) GetDetail() string {
+	if a == nil {
+		return ""
+	}
+	return a.detail
 }
 
 // NoticeCommandCondition ... 条件に該当する「お知らせ」データを決定するために利用

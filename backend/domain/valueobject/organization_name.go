@@ -37,26 +37,26 @@ type organizationName struct {
 }
 
 // GetOrganizationLogicalName ...
-func (on *organizationName) GetOrganizationLogicalName() string {
-	return on.logicalName
+func (v *organizationName) GetOrganizationLogicalName() string {
+	return v.logicalName
 }
 
 // GetOrganizationLogicalKanaName ...
-func (on *organizationName) GetOrganizationLogicalKanaName() string {
-	return on.logicalKanaName
+func (v *organizationName) GetOrganizationLogicalKanaName() string {
+	return v.logicalKanaName
 }
 
 // GetOrganizationPhysicalName ...
-func (on *organizationName) GetOrganizationPhysicalName() string {
-	return on.physicalName
+func (v *organizationName) GetOrganizationPhysicalName() string {
+	return v.physicalName
 }
 
 // Equals ...
-func (on *organizationName) Equals(comparison OrganizationName) bool {
-	if on == nil || comparison == nil {
+func (v *organizationName) Equals(comparison OrganizationName) bool {
+	if v == nil || comparison == nil {
 		return false
 	}
-	return (strings.Compare(on.GetOrganizationLogicalName(), comparison.GetOrganizationLogicalName()) != -1) &&
-		(strings.Compare(on.GetOrganizationLogicalKanaName(), comparison.GetOrganizationLogicalKanaName()) != -1) &&
-		(strings.Compare(on.GetOrganizationPhysicalName(), comparison.GetOrganizationPhysicalName()) != -1)
+	return (strings.Compare(v.GetOrganizationLogicalName(), comparison.GetOrganizationLogicalName()) != -1) &&
+		(strings.Compare(v.GetOrganizationLogicalKanaName(), comparison.GetOrganizationLogicalKanaName()) != -1) &&
+		(strings.Compare(v.GetOrganizationPhysicalName(), comparison.GetOrganizationPhysicalName()) != -1)
 }
