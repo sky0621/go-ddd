@@ -49,5 +49,5 @@ type NoticeQueryRepository interface {
 	GetByUniqueID(context.Context, vo.UniqueID) (aggregate.Notice, error.ApplicationError)
 
 	// GetByCondition ... 引数で渡された「お知らせ」データ取得条件に合致する複数の「お知らせ」データを返却する。（取得条件が nil の場合は全ての「お知らせ」データを返却する。）
-	GetByCondition(context.Context, aggregate.NoticeReadCondition) ([]aggregate.Notice, error.ApplicationError)
+	GetByCondition(context.Context, aggregate.NoticeQueryCondition) ([]aggregate.Notice, error.ApplicationError)
 }

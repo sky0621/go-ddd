@@ -41,25 +41,25 @@ type noticeAttribute struct {
 }
 
 // GetID ...
-func (a *noticeAttribute) GetID() vo.UniqueID {
-	if a == nil {
+func (e *noticeAttribute) GetID() vo.UniqueID {
+	if e == nil {
 		return nil
 	}
-	return a.id
+	return e.id
 }
 
 // GetTitle ...
-func (a *noticeAttribute) GetTitle() string {
-	if a == nil {
+func (e *noticeAttribute) GetTitle() string {
+	if e == nil {
 		return ""
 	}
-	return a.title
+	return e.title
 }
 
 // GetDetail ...
-func (a *noticeAttribute) GetDetail() string {
-	if a == nil {
+func (e *noticeAttribute) GetDetail() string {
+	if e == nil {
 		return ""
 	}
-	return a.detail
+	return e.detail
 }

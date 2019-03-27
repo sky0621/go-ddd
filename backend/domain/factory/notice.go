@@ -8,9 +8,14 @@ import (
 	"time"
 )
 
-// CreateNoticeAggregate ...
-func CreateNoticeAggregate(uid vo.UniqueID, title, detail string, noticeSeverity, publishType int, from, to *time.Time) (aggregate.Notice, error.ApplicationError) {
-	attribute, err := entity.NewNoticeNoticeAttribute(uid, title, detail)
+// NoticeFactory ... 「お知らせ」集約のあらゆる生成方法を担う
+type NoticeFactory struct {
+	uid vo.UniqueID
+}
+
+// CreateNotice ...
+func (f *NoticeFactory) CreateNotice(title, detail string, noticeSeverity, publishType int, from, to *time.Time) (aggregate.Notice, error.ApplicationError) {
+	attribute, err := entity.NewNoticeNoticeAttribute(f.uid, title, detail)
 	if err != nil {
 		return nil, err
 	}

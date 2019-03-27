@@ -1,16 +1,16 @@
 package aggregate
 
-// NewNoticeReadCondition ...
-func NewNoticeReadCondition(notices []Notice) NoticeReadCondition {
-	return &noticeReadCondition{notices: notices}
+// NewNoticeQueryCondition ...
+func NewNoticeQueryCondition(notices []Notice) NoticeQueryCondition {
+	return &noticeQueryCondition{notices: notices}
 }
 
-// NoticeReadCondition ... 条件に該当する「お知らせ」データを決定するために利用
-type NoticeReadCondition interface {
+// NoticeQueryCondition ... 条件に該当する「お知らせ」データを決定するために利用
+type NoticeQueryCondition interface {
 
 	// FIXME 複数の Notice を持つなり、ページング情報を持つなり、要件にあった取得条件を定義！
 }
 
-type noticeReadCondition struct {
+type noticeQueryCondition struct {
 	notices []Notice
 }

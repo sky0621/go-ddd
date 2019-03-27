@@ -2,15 +2,19 @@ package usecase
 
 import (
 	"context"
-	"go-ddd/backend/domain/entity"
 	"go-ddd/backend/domain/error"
+	"go-ddd/backend/domain/factory"
 	"go-ddd/backend/domain/repository"
+	vo "go-ddd/backend/domain/valueobject"
 	"go-ddd/backend/usecase/input"
 )
 
-// NewNoticeUsecase ...
-func NewNoticeUsecase(commandRepository repository.NoticeCommandRepository, queryRepository repository.NoticeQueryRepository) NoticeUsecase {
-	return &noticeUsecase{}
+// NewNotice ...
+func NewNotice(command repository.NoticeCommandRepository, query repository.NoticeQueryRepository) NoticeUsecase {
+	return &noticeUsecase{
+		command: command,
+		query:   query,
+	}
 }
 
 // NoticeUsecase ... 「お知らせ」に対するユースケース定義
@@ -19,13 +23,16 @@ type NoticeUsecase interface {
 }
 
 type noticeUsecase struct {
-	commandRepository repository.NoticeCommandRepository
-	queryRepository   repository.NoticeQueryRepository
+	command repository.NoticeCommandRepository
+	query   repository.NoticeQueryRepository
 }
 
 // AddNotice ...
-func (u *noticeUsecase) AddNotice(ctx context.Context, input *input.Notice) error.ApplicationError {
-	var m *entity.Notice
-	// FIXME: input -> model.Notice へのコンバーターを実装！
-	return u.commandRepository.Create(ctx, m)
+func (u *noticeUsecase) AddNotice(ctx context.Context, in *input.Notice) error.ApplicationError {
+	f := factory.NoticeFactory{uid: vo.NewUniqueID()}
+	n, err := f.CreateNotice(in.Title, in.Detail, in.NoticeSeverity, in.PublishType, in.From, in.To)
+	if err != nil {
+		return err
+	}
+	return u.command.Create(ctx, n)
 }

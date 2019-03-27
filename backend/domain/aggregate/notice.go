@@ -6,24 +6,24 @@ import (
 )
 
 // NewNotice ...
-func NewNotice(noticeAttribute entity.NoticeAttribute, severity vo.NoticeSeverity, publishControl vo.PublishControl) Notice {
+func NewNotice(attribute entity.NoticeAttribute, severity vo.NoticeSeverity, publishControl vo.PublishControl) Notice {
 	return &notice{
-		noticeAttribute: noticeAttribute,
-		severity:        severity,
-		publishControl:  publishControl,
+		attribute:      attribute,
+		severity:       severity,
+		publishControl: publishControl,
 	}
 }
 
 // Notice ... 「お知らせ」集約情報
 type Notice interface {
-	GetNoticeAttribute() entity.NoticeAttribute
+	GetAttribute() entity.NoticeAttribute
 	GetNoticeSeverity() vo.NoticeSeverity
 	GetPublishControl() vo.PublishControl
 }
 
 type notice struct {
 	// 「お知らせ」属性
-	noticeAttribute entity.NoticeAttribute
+	attribute entity.NoticeAttribute
 
 	// 重要度
 	severity vo.NoticeSeverity
@@ -32,12 +32,12 @@ type notice struct {
 	publishControl vo.PublishControl
 }
 
-// GetNoticeAttribute ...
-func (a *notice) GetNoticeAttribute() entity.NoticeAttribute {
+// GetAttribute ...
+func (a *notice) GetAttribute() entity.NoticeAttribute {
 	if a == nil {
 		return nil
 	}
-	return a.noticeAttribute
+	return a.attribute
 }
 
 // GetNoticeSeverity ...
