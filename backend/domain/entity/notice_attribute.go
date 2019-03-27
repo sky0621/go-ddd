@@ -32,8 +32,10 @@ type NoticeAttribute interface {
 type noticeAttribute struct {
 	// ユニークに特定するID
 	id vo.UniqueID
+
 	// 概要を示すタイトル
 	title string
+
 	// 詳細
 	detail string
 }
