@@ -34,19 +34,19 @@ type OrganizationCommandRepository interface {
 	 * 削除
 	 */
 	// DeleteByUniqueID ... 引数で渡されたユニークIDで特定される「組織」データ１件を削除する。
-	DeleteByUniqueID(context.Context, vo.UniqueID) error.ApplicationError
+	DeleteByUniqueID(context.Context, vo.OrganizationID) error.ApplicationError
 
 	// DeleteByCondition ... 引数で渡された「組織」データ削除条件に合致する複数の「組織」データを削除する。
 	DeleteByCondition(context.Context, aggregate.OrganizationCommandCondition) error.ApplicationError
 
 	// DeleteBatch ... 引数で渡されたユニークIDで特定される「組織」データ複数件を削除する。
-	DeleteBatch(context.Context, []vo.UniqueID) error.ApplicationError
+	DeleteBatch(context.Context, []vo.OrganizationID) error.ApplicationError
 }
 
 // OrganizationQueryRepository ... 「組織」データへのCRUDのうち、Queryに該当するRを担う。
 type OrganizationQueryRepository interface {
 	// GetByUniqueID ... 引数で渡されたユニークIDで特定される「組織」データ１件を取得する。（取得対象が存在しない場合は nil を返却する。）
-	GetByUniqueID(context.Context, vo.UniqueID) (aggregate.Organization, error.ApplicationError)
+	GetByUniqueID(context.Context, vo.OrganizationID) (aggregate.Organization, error.ApplicationError)
 
 	// GetByCondition ... 引数で渡された「組織」データ取得条件に合致する複数の「組織」データを返却する。（取得条件が nil の場合は全ての「組織」データを返却する。）
 	GetByCondition(context.Context, aggregate.OrganizationQueryCondition) ([]aggregate.Organization, error.ApplicationError)

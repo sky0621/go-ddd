@@ -7,34 +7,33 @@ import (
 )
 
 // NewOrganizationAttribute ...
-func NewOrganizationAttribute(uid vo.UniqueID, organizationName vo.OrganizationName) (OrganizationAttribute, error.ApplicationError) {
-	if uid.GetVal() == "" {
+func NewOrganizationAttribute(id vo.OrganizationID, organizationNames vo.OrganizationNames) (OrganizationAttribute, error.ApplicationError) {
+	if id.GetVal() == "" {
 		return nil, error.CreateValidationError(error.Required, errors.New("id is required"))
 	}
 
 	return &organizationAttribute{
-		id:               uid,
-		organizationName: organizationName,
+		id:                id,
+		organizationNames: organizationNames,
 	}, nil
 }
 
-// Organization ... 「ナレッジ」データ定義
+// OrganizationAttribute ... 「組織」データ定義
 type OrganizationAttribute interface {
-	GetID() vo.UniqueID
-	GetOrganizationName() vo.OrganizationName
+	GetID() vo.OrganizationID
+	GetOrganizationNames() vo.OrganizationNames
 }
 
-// OrganizationAttribute ... 「組織」データ定義
 type organizationAttribute struct {
 	// ユニークに特定するID
-	id vo.UniqueID
+	id vo.OrganizationID
 
-	// 組織名称
-	organizationName vo.OrganizationName
+	// 組織名
+	organizationNames vo.OrganizationNames
 }
 
 // GetID ...
-func (e *organizationAttribute) GetID() vo.UniqueID {
+func (e *organizationAttribute) GetID() vo.OrganizationID {
 	if e == nil {
 		return nil
 	}
@@ -42,9 +41,9 @@ func (e *organizationAttribute) GetID() vo.UniqueID {
 }
 
 // GetTitle ...
-func (e *organizationAttribute) GetOrganizationName() vo.OrganizationName {
+func (e *organizationAttribute) GetOrganizationNames() vo.OrganizationNames {
 	if e == nil {
 		return nil
 	}
-	return e.title
+	return e.organizationNames
 }
