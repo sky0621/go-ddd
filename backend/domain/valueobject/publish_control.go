@@ -17,6 +17,7 @@ type PublishControl interface {
 type publishControl struct {
 	// publishType ... 特定情報の公開設定
 	publishType PublishType
+
 	// publishTerm ... 公開期間
 	publishTerm PublishTerm
 }

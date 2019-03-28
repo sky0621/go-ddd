@@ -38,6 +38,7 @@ type PublishTerm interface {
 type publishTerm struct {
 	// 公開開始日時（ nil の場合は即時開始）
 	from *time.Time
+
 	// 公開終了日時（ nil の場合は終了）
 	to *time.Time
 }

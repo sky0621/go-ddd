@@ -8,12 +8,17 @@ import (
 	"time"
 )
 
+// NewNoticeFactory ...
+func NewNoticeFactory(id string) *NoticeFactory {
+	return &NoticeFactory{uid: vo.NewUniqueIDByParam(id)}
+}
+
 // NoticeFactory ... 「お知らせ」集約のあらゆる生成方法を担う
 type NoticeFactory struct {
 	uid vo.UniqueID
 }
 
-// CreateNotice ...
+// CreateNotice ... domain外からの値の受け渡しのために、プリミティブないしgo標準パッケージの型を使う
 func (f *NoticeFactory) CreateNotice(title, detail string, noticeSeverity, publishType int, from, to *time.Time) (aggregate.Notice, error.ApplicationError) {
 	attribute, err := entity.NewNoticeNoticeAttribute(f.uid, title, detail)
 	if err != nil {

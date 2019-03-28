@@ -1,14 +1,10 @@
 package valueobject
 
-import (
-	"strings"
-
-	"github.com/google/uuid"
-)
+import "go-ddd/backend/domain/service"
 
 // NewUniqueID ...
 func NewUniqueID() UniqueID {
-	return &uniqueID{val: CreateUniqueID()}
+	return &uniqueID{val: service.CreateUniqueID()}
 }
 
 // NewUniqueIDByParam ...
@@ -37,9 +33,4 @@ func (id *uniqueID) Equals(comparison UniqueID) bool {
 		return false
 	}
 	return id.GetVal() == comparison.GetVal()
-}
-
-// CreateUniqueID ...
-func CreateUniqueID() string {
-	return strings.Replace(uuid.New().String(), "-", "", -1)
 }

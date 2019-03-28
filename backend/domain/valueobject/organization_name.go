@@ -30,8 +30,10 @@ type OrganizationName interface {
 type organizationName struct {
 	// 論理名
 	logicalName string
+
 	// 論理名（カナ）
 	logicalKanaName string
+
 	// 物理名
 	physicalName string
 }

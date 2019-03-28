@@ -1,9 +1,17 @@
 package input
 
-import "time"
+import (
+	"go-ddd/backend/domain/aggregate"
+	"go-ddd/backend/domain/error"
+	"go-ddd/backend/domain/factory"
+	"time"
+)
 
 // Notice ... ユースケースとしての「お知らせ」情報を定義
 type Notice struct {
+	// ID
+	ID string
+
 	// タイトル
 	Title string
 
@@ -21,4 +29,14 @@ type Notice struct {
 
 	// 公開終了日時
 	To *time.Time
+}
+
+// ConvertToAggregate ...
+func (i *Notice) ConvertToAggregate() (aggregate.Notice, error.ApplicationError) {
+	f := factory.NewNoticeFactory(i.ID)
+	n, err := f.CreateNotice(i.Title, i.Detail, i.NoticeSeverity, i.PublishType, i.From, i.To)
+	if err != nil {
+		return nil, err
+	}
+	return n, nil
 }

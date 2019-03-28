@@ -8,6 +8,11 @@ import (
 	"time"
 )
 
+// NewKnowledgeFactory ...
+func NewKnowledgeFactory(id string) *KnowledgeFactory {
+	return &KnowledgeFactory{uid: vo.NewUniqueIDByParam(id)}
+}
+
 // KnowledgeFactory ... 「お知らせ」集約のあらゆる生成方法を担う
 type KnowledgeFactory struct {
 	uid vo.UniqueID

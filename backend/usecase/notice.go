@@ -3,9 +3,7 @@ package usecase
 import (
 	"context"
 	"go-ddd/backend/domain/error"
-	"go-ddd/backend/domain/factory"
 	"go-ddd/backend/domain/repository"
-	vo "go-ddd/backend/domain/valueobject"
 	"go-ddd/backend/usecase/input"
 )
 
@@ -29,8 +27,7 @@ type noticeUsecase struct {
 
 // AddNotice ...
 func (u *noticeUsecase) AddNotice(ctx context.Context, in *input.Notice) error.ApplicationError {
-	f := factory.NoticeFactory{uid: vo.NewUniqueID()}
-	n, err := f.CreateNotice(in.Title, in.Detail, in.NoticeSeverity, in.PublishType, in.From, in.To)
+	n, err := in.ConvertToAggregate()
 	if err != nil {
 		return err
 	}

@@ -7,39 +7,24 @@ import (
 	vo "go-ddd/backend/domain/valueobject"
 )
 
+// NewOrganizationFactory ...
+func NewOrganizationFactory(id string) *OrganizationFactory {
+	return &OrganizationFactory{uid: vo.NewUniqueIDByParam(id)}
+}
+
 // OrganizationFactory ... 「組織」集約のあらゆる生成方法を担う
 type OrganizationFactory struct {
 	uid vo.UniqueID
 }
 
-// CreateRootOrganization ...
-func (f *OrganizationFactory) CreateRootOrganization(organizationName vo.OrganizationName) (aggregate.Organization, error.ApplicationError) {
-	attribute, err := entity.NewOrganizationAttribute(f.uid, organizationName)
-	if err != nil {
-		return nil, err
-	}
-
-	return aggregate.NewOrganization(attribute, nil, nil), nil
-}
-
-// CreateRootOrganizationWithChildren ...
-func (f *OrganizationFactory) CreateRootOrganizationWithChildren(organizationName vo.OrganizationName, children []entity.OrganizationAttribute) (aggregate.Organization, error.ApplicationError) {
-	attribute, err := entity.NewOrganizationAttribute(f.uid, organizationName)
-	if err != nil {
-		return nil, err
-	}
-
-	return aggregate.NewOrganization(attribute, nil, children), nil
-}
-
 // CreateOrganization ...
-func (f *OrganizationFactory) CreateOrganization(organizationName vo.OrganizationName, parent entity.OrganizationAttribute) (aggregate.Organization, error.ApplicationError) {
-	attribute, err := entity.NewOrganizationAttribute(f.uid, organizationName)
+func (f *OrganizationFactory) CreateOrganization(logicalName, logicalKanaName, physicalName, parentID string) (aggregate.Organization, error.ApplicationError) {
+	attribute, err := entity.NewOrganizationAttribute(f.uid, vo.NewOrganizationName(logicalName, logicalKanaName, physicalName))
 	if err != nil {
 		return nil, err
 	}
 
-	return aggregate.NewOrganization(attribute, parent, nil), nil
+	return aggregate.NewOrganization(attribute, entity.NewOrganizationAttribute(vo.NewUniqueIDByParam(parentID), nil), nil), nil
 }
 
 // CreateOrganizationWithChildren ...
